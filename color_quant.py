@@ -20,7 +20,7 @@ if __name__ == "__main__":
     (h, w, c) = image_as_array.shape
     image_as_array2d = image_as_array.reshape(h * w, c)
     model = KMeans(n_clusters=args.num_colors)
-    labels = model.fit_predict(image_as_array2d)
+    color_palette = model.fit_predict(image_as_array2d)
     rgb_codes = model.cluster_centers_.round(0).astype("uint8")
-    quantized_image = np.reshape(rgb_codes[labels], (h, w, c))
+    quantized_image = np.reshape(rgb_codes[color_palette], (h, w, c))
     mpimg.imsave(output_filename, quantized_image)
